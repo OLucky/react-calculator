@@ -14,6 +14,7 @@ describe('Calculator reducer', () => {
       );
     });
   }),
+  
   describe('Display actions', () => {
     describe('Add Symbol', () => {
       test('should add one symbol to display and a first operand if operation is not set', () => {
@@ -95,25 +96,39 @@ describe('Calculator reducer', () => {
         ).toEqual({ ...defaultState, display: mockDisplay, firstOperand: Number(mockDisplay) });
       });
     });
+
     describe('Remove Symbol', () => {
       test('should remove one symbol from display', () => {
-        const mockDisplay = '12345';
+        const mockState = { ...defaultState, display: '12345', firstOperand: 12345 };
         expect(
-          calculatorReducer(
-            { ...defaultState, display: mockDisplay },
-            { type: actions.constants.REMOVE_FROM_DISPLAY }
-          )
-        ).toEqual({ ...defaultState, display: '1234' });
+          calculatorReducer(mockState, { type: actions.constants.REMOVE_FROM_DISPLAY })
+        ).toEqual({ ...defaultState, display: '1234', firstOperand: 1234 });
+      });
+
+      test('should remove one symbol from display and second operand', () => {
+        const mockState = {
+          ...defaultState,
+          display: '1234',
+          firstOperand: 12345,
+          operation: '+',
+          secondOperand: 1234
+        };
+        expect(
+          calculatorReducer(mockState, { type: actions.constants.REMOVE_FROM_DISPLAY })
+        ).toEqual({
+          ...defaultState,
+          display: '123',
+          firstOperand: 12345,
+          operation: '+',
+          secondOperand: 123
+        });
       });
 
       test('should return zero if needs to remove last symbol from display', () => {
-        const mockDisplay = '1';
+        const mockState = { ...defaultState, display: '1', firstOperand: 1 };
         expect(
-          calculatorReducer(
-            { ...defaultState, display: mockDisplay },
-            { type: actions.constants.REMOVE_FROM_DISPLAY }
-          )
-        ).toEqual({ ...defaultState, display: '0' });
+          calculatorReducer(mockState, { type: actions.constants.REMOVE_FROM_DISPLAY })
+        ).toEqual({ ...defaultState, display: '0', firstOperand: 0 });
       });
     });
   });

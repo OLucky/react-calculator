@@ -23,16 +23,16 @@ const addSymbol = (state, action) => {
   };
 };
 
-/* 
-    TODO: Add logic for removing symbols from first and second operands
-*/
-
 const removeSymbol = state => {
   const prevDisplay = state.display;
   const newDisplay =
-		prevDisplay.length > 1 ? prevDisplay.substring(0, prevDisplay.length - 1) : '0';
+    prevDisplay.length > 1 ? prevDisplay.substring(0, prevDisplay.length - 1) : '0';
+    
 
-  return { ...state, display: newDisplay };
+  return { ...state, 
+    display: newDisplay,
+    [`${state.operation ? 'secondOperand' : 'firstOperand'}`]: Number(newDisplay)
+  };
 };
 
 const setOperation = (state, action) => {
