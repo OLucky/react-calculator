@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import handlers from '../store/calculator/handlers';
+import { string, func } from 'prop-types';
 
 class Calculator extends Component {
   handleKeyPress = event => {
@@ -43,7 +43,7 @@ class Calculator extends Component {
       default:
         break;
     }
-  }
+  };
 
   render() {
     const {
@@ -59,62 +59,71 @@ class Calculator extends Component {
       <main className="calc" tabIndex="0" onKeyDown={this.handleKeyPress}>
         <div className="calc_display">{display}</div>
         <button className="calc_button -col2" onClick={onReset}>
-					Reset
+          Reset
         </button>
         <button className="calc_button -col2" onClick={onRemoveSymbol}>
-					Remove
+          Remove
         </button>
         <button className="calc_button" onClick={() => onAddSymbol(7)}>
-					7
+          7
         </button>
         <button className="calc_button" onClick={() => onAddSymbol(8)}>
-					8
+          8
         </button>
         <button className="calc_button" onClick={() => onAddSymbol(9)}>
-					9
+          9
         </button>
         <button className="calc_button" onClick={() => onSetOperation('+')}>
-					+
+          +
         </button>
         <button className="calc_button" onClick={() => onAddSymbol(4)}>
-					4
+          4
         </button>
         <button className="calc_button" onClick={() => onAddSymbol(5)}>
-					5
+          5
         </button>
         <button className="calc_button" onClick={() => onAddSymbol(6)}>
-					6
+          6
         </button>
         <button className="calc_button" onClick={() => onSetOperation('-')}>
-					-
+          -
         </button>
         <button className="calc_button" onClick={() => onAddSymbol(1)}>
-					1
+          1
         </button>
         <button className="calc_button" onClick={() => onAddSymbol(2)}>
-					2
+          2
         </button>
         <button className="calc_button" onClick={() => onAddSymbol(3)}>
-					3
+          3
         </button>
         <button className="calc_button" onClick={() => onSetOperation('*')}>
-					*
+          *
         </button>
         <button className="calc_button" onClick={() => onAddSymbol(0)}>
-					0
+          0
         </button>
         <button className="calc_button" onClick={() => onAddSymbol('.')}>
-					.
+          .
         </button>
         <button className="calc_button" onClick={onDoOperation}>
-					=
+          =
         </button>
         <button className="calc_button" onClick={() => onSetOperation('/')}>
-					/
+          /
         </button>
       </main>
     );
   }
 }
+
+Calculator.propTypes = {
+  display: string.isRequired,
+  onAddSymbol: func.isRequired,
+  onRemoveSymbol: func.isRequired,
+  onReset: func.isRequired,
+  onSetOperation: func.isRequired,
+  onDoOperation: func.isRequired
+};
 
 export default Calculator;

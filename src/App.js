@@ -6,17 +6,17 @@ import store from './store/index';
 
 import CalculatorContainer from './containers/CalculatorContainer';
 class App extends Component {
-	state = {
-	  works: true
-	};
+  state = {
+    works: true
+  };
 
-	render() {
+  render() {
    return (
      <Provider store={store}>
         <CalculatorContainer></CalculatorContainer>
      </Provider>
    );
-	}
+  }
 }
 
 export default hot(module)(App);
