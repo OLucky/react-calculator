@@ -1,6 +1,6 @@
 const addSymbol = (state, action) => {
   const prevDisplay = state.operation && !state.secondOperand ? '0' : state.display;
-  const symbol = action.symbol;
+  const symbol = String(action.symbol);
 
   let newDisplay = prevDisplay;
   switch (true) {
@@ -31,7 +31,7 @@ const removeSymbol = state => {
 
   return { ...state, 
     display: newDisplay,
-    [`${state.operation ? 'secondOperand' : 'firstOperand'}`]: Number(newDisplay)
+    [`${(state.operation && state.secondOperand !== null) ? 'secondOperand' : 'firstOperand'}`]: Number(newDisplay)
   };
 };
 
@@ -42,6 +42,10 @@ const setOperation = (state, action) => {
 
 const doOperation = state => {
   const { firstOperand, secondOperand, operation } = state;
+
+  if (!operation) {
+    return state;
+  }
 
   if (operation === '/' && secondOperand === 0) {
     return {

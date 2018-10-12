@@ -1,3 +1,15 @@
-body {
-  background-color: red;
+.calc{
+  display: grid;
+  max-width: 700px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.calc_display {
+  grid-column: 1 / span 4;
+}
+
+.calc_button {
+  &.-col2 {
+    grid-column-end: span 2;
+  }
 }

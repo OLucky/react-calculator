@@ -44,4 +44,4 @@ export const calculator = (state = defaultState, action) => {
   }
 };
 
-export default combineReducers(calculator);
+export default combineReducers({calculator});

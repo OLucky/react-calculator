@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
+import {Provider} from 'react-redux';
 import { hot } from 'react-hot-loader';
 
-class App extends Component {
-  state = {
-    works: true
-  };
+import store from './store/index';
 
-  render() {
-    return (
-      <div>
-        <h3> - Hello there</h3>
-        <h3> - General Kenobi!</h3>
-      </div>
-    );
-  }
+import CalculatorContainer from './containers/CalculatorContainer';
+class App extends Component {
+	state = {
+	  works: true
+	};
+
+	render() {
+   return (
+     <Provider store={store}>
+        <CalculatorContainer></CalculatorContainer>
+     </Provider>
+   );
+	}
 }
 
 export default hot(module)(App);
